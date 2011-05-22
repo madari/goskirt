@@ -10,17 +10,21 @@ using the setup encapsuled in the underlaying struct type.
 
 Usage:
 
+	package main
+	
 	import (
 		"goskirt"
 		"os"
 	)
-
+	
 	func main() {
 		data := []byte("Hello, upskirt!\n===============\n")
-
-		skirt := goskirt.Goskirt{goskirt.EXT_AUTOLINK, 
-			goskirt.HTML_SMARTYPANTS, 
-
+	
+		skirt := goskirt.Goskirt{
+			goskirt.EXT_AUTOLINK | goskirt.EXT_STRIKETHROUGH,
+			goskirt.HTML_SMARTYPANTS | goskirt.HTML_USE_XHTML,
+		}
+	
 		// <h1>Hello, upskirt!</h1>
 		skirt.WriteHTML(os.Stdout, data)
 	}
