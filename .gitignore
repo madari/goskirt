@@ -1,0 +1,9 @@
+.DS_Store
+*.[568ao]
+._*
+[568a].out
+*~
+_test
+_testmain.go
+_obj
+_cgo*
