@@ -63,10 +63,8 @@ Render mode is a combination of:
 Install
 -------
 
-Goskirt bundles the Upskirt library, and hence has zero depedencies.
-The most convenient way to install Goskirt is to use goinstall:
-
-	goinstall http://github.com/madari/goskirt
+	git clone git://github.com/madari/goskirt
+	make -C goskirt install
 
 License
 -------
