@@ -1,9 +1,9 @@
 package goskirt
 
 /*
-#include "upskirt/markdown.h"
-#include "upskirt/buffer.h"
-#include "upskirt/html.h"
+#include "sundown/markdown.h"
+#include "sundown/buffer.h"
+#include "sundown/html.h"
 */
 import "C"
 
@@ -25,7 +25,8 @@ const (
 	EXT_AUTOLINK          = C.MKDEXT_AUTOLINK
 	EXT_STRIKETHROUGH     = C.MKDEXT_STRIKETHROUGH
 	EXT_LAX_HTML_BLOCKS   = C.MKDEXT_LAX_HTML_BLOCKS
-	EXT_SPACE_HEADERS     = C.MKDEXT_SPACE_HEADERS // 1 << 6
+	EXT_SPACE_HEADERS     = C.MKDEXT_SPACE_HEADERS
+	EXT_SUPERSCRIPT       = C.MKDEXT_SUPERSCRIPT // 1 << 7
 )
 
 // Render modes
@@ -70,7 +71,8 @@ func (g Goskirt) WriteTOC(w io.Writer, p []byte) (n int, err os.Error) {
 func render(w io.Writer, extensions, renderModes, rndr uint, p []byte) (n int, err os.Error) {
 	var ob *C.struct_buf
 	var ib C.struct_buf
-	var renderer C.struct_mkd_renderer
+	var callbacks C.struct_sd_callbacks
+	var options C.struct_html_renderopt
 
 	ib.data = (*C.char)(unsafe.Pointer(&p[0]))
 	ib.size = C.size_t(len(p))
@@ -82,19 +84,18 @@ func render(w io.Writer, extensions, renderModes, rndr uint, p []byte) (n int, e
 
 	switch rndr {
 	case HTMLRenderer:
-		C.upshtml_renderer(&renderer, C.uint(renderModes&^HTML_SMARTYPANTS))
+		C.sdhtml_renderer(&callbacks, &options, C.uint(renderModes&^HTML_SMARTYPANTS))
 	case TOCRenderer:
-		C.upshtml_toc_renderer(&renderer)
+		C.sdhtml_toc_renderer(&callbacks, &options)
 	default:
 		panic("unknown renderer")
 	}
 
-	C.ups_markdown(ob, &ib, &renderer, C.uint(extensions))
-	C.upshtml_free_renderer(&renderer)
+	C.sd_markdown(ob, &ib, C.uint(extensions), &callbacks, unsafe.Pointer(&options))
 
 	if renderModes&HTML_SMARTYPANTS > 0 {
 		sb := C.bufnew(128)
-		C.upshtml_smartypants(sb, ob)
+		C.sdhtml_smartypants(sb, ob)
 		n, err = w.Write((*[1 << 30]byte)(unsafe.Pointer(sb.data))[0:sb.size])
 		C.bufrelease(sb)
 	} else {

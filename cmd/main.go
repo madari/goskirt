@@ -83,7 +83,7 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	
+
 	switch renderer {
 	case goskirt.HTMLRenderer:
 		gs.WriteHTML(os.Stdout, data)

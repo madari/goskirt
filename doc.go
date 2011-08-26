@@ -1,9 +1,10 @@
 /*
-Package goskirt provides Go-bindings for the excellent Upskirt markdown parser.
+Package goskirt provides Go-bindings for the excellent Sundown markdown parser
+(F/K/A Upskirt).
 
 To use goskirt, create a new Goskirt-value with the markdown extensions and
 render modes you want. The extensions and render modes are encapsulated in the
-struct as bitsets following the schematics of the Upskirt library. The created
+struct as bitsets following the schematics of the Sundown library. The created
 value contains two methods: WriteHTML and WriteTOC that both parse the data
 given in a byte slice and writes the formatted results into the given io.Writer
 using the setup encapsuled in the underlaying struct type.
@@ -18,14 +19,14 @@ Usage:
 	)
 	
 	func main() {
-		data := []byte("Hello, upskirt!\n===============\n")
+		data := []byte("Hello, sundown!\n===============\n")
 	
 		skirt := goskirt.Goskirt{
 			goskirt.EXT_AUTOLINK | goskirt.EXT_STRIKETHROUGH,
 			goskirt.HTML_SMARTYPANTS | goskirt.HTML_USE_XHTML,
 		}
 	
-		// <h1>Hello, upskirt!</h1>
+		// <h1>Hello, sundown!</h1>
 		skirt.WriteHTML(os.Stdout, data)
 	}
 
