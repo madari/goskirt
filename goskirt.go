@@ -2,9 +2,9 @@ package goskirt
 
 /*
 #cgo CFLAGS: -O3
-#include "sundown/markdown.h"
-#include "sundown/buffer.h"
-#include "sundown/html.h"
+#include "markdown.h"
+#include "buffer.h"
+#include "html.h"
 */
 import "C"
 
