@@ -2,15 +2,14 @@ package goskirt
 
 /*
 #cgo CFLAGS: -O3
-#include "sundown/markdown.h"
-#include "sundown/buffer.h"
-#include "sundown/html.h"
+#include "markdown.h"
+#include "buffer.h"
+#include "html.h"
 */
 import "C"
 
 import (
 	"io"
-	"os"
 	"unsafe"
 )
 
@@ -59,17 +58,17 @@ type Goskirt struct {
 
 // WriteHTML renders HTML into w using the source markdown-data p.
 // It returns the number of bytes written or and error if writing failed.
-func (g Goskirt) WriteHTML(w io.Writer, p []byte) (n int, err os.Error) {
+func (g Goskirt) WriteHTML(w io.Writer, p []byte) (n int, err error) {
 	return render(w, g.Extensions, g.RenderModes, HTMLRenderer, p)
 }
 
 // WriteTOC renders a list table of contents into w using the source markdown-data p
 // It returns the number of bytes written or and error if writing failed.
-func (g Goskirt) WriteTOC(w io.Writer, p []byte) (n int, err os.Error) {
+func (g Goskirt) WriteTOC(w io.Writer, p []byte) (n int, err error) {
 	return render(w, g.Extensions, g.RenderModes, TOCRenderer, p)
 }
 
-func render(w io.Writer, extensions, renderModes, rndr uint, p []byte) (n int, err os.Error) {
+func render(w io.Writer, extensions, renderModes, rndr uint, p []byte) (n int, err error) {
 	var ob *C.struct_buf
 	var ib C.struct_buf
 	var callbacks C.struct_sd_callbacks
