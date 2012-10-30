@@ -2,8 +2,7 @@ Goskirt
 =======
 
 Package goskirt provides Go-bindings for the excellent
-[Sundown](https://github.com/tanoku/sundown)
-Markdown parser ["that doesn't suck"](https://github.com/tanoku/sundown) (F/K/A Upskirt).
+[Sundown](https://github.com/vmg/sundown) Markdown parser. (F/K/A Upskirt).
 
 To use goskirt, create a new Goskirt-value with the markdown extensions and
 render modes you want. The extensions and render modes are encapsulated in the
@@ -18,7 +17,7 @@ Example
 	package main
 	
 	import (
-		"goskirt"
+		"github.com/madari/goskirt"
 		"os"
 	)
 	
@@ -47,8 +46,8 @@ Render mode is a combination of:
 	HTML_SAFELINK
 	HTML_TOC
 	HTML_HARD_WRAP
-	HTML_GITHUB_BLOCKCODE
 	HTML_USE_XHTML
+	HTML_ESCAPE
 	HTML_SMARTYPANTS
 
 ... and the extensions respectively:
@@ -58,20 +57,21 @@ Render mode is a combination of:
 	EXT_FENCED_CODE
 	EXT_AUTOLINK
 	EXT_STRIKETHROUGH
-	EXT_LAX_HTML_BLOCKS
+	EXT_SPACE_HEADERS
+	EXT_SUPERSCRIPT
+	EXT_LAX_SPACING
 
 Install
 -------
 
-	git clone git://github.com/madari/goskirt
-	make -C goskirt install
+	go get github.com/madari/goskirt
 
 License
 -------
 
-*For the Sundown license, see the files in bundled in sundown/.*
+*For the Sundown license, see the bundled C files.*
 
-Copyright (c) 2011 Jukka-Pekka Kekkonen <karatepekka@gmail.com>
+Copyright (c) 2012 Jukka-Pekka Kekkonen <karatepekka@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
+	"github.com/madari/goskirt"
 	"io/ioutil"
-	"github.com/iwinux/goskirt"
+	"os"
 )
 
 var eflags = map[string]uint{
@@ -14,24 +14,24 @@ var eflags = map[string]uint{
 	"EXT_FENCED_CODE":       goskirt.EXT_FENCED_CODE,
 	"EXT_AUTOLINK":          goskirt.EXT_AUTOLINK,
 	"EXT_STRIKETHROUGH":     goskirt.EXT_STRIKETHROUGH,
-	"EXT_LAX_HTML_BLOCKS":   goskirt.EXT_LAX_HTML_BLOCKS,
 	"EXT_SPACE_HEADERS":     goskirt.EXT_SPACE_HEADERS,
+	"EXT_SUPERSCRIPT":       goskirt.EXT_SUPERSCRIPT,
+	"EXT_LAX_SPACING":       goskirt.EXT_LAX_SPACING,
 }
 
 var rmflags = map[string]uint{
-	"HTML_SKIP_HTML":        goskirt.HTML_SKIP_HTML,
-	"HTML_SKIP_STYLE":       goskirt.HTML_SKIP_STYLE,
-	"HTML_SKIP_IMAGES":      goskirt.HTML_SKIP_IMAGES,
-	"HTML_SKIP_LINKS":       goskirt.HTML_SKIP_LINKS,
-	"HTML_EXPAND_TABS":      goskirt.HTML_EXPAND_TABS,
-	"HTML_SAFELINK":         goskirt.HTML_SAFELINK,
-	"HTML_TOC":              goskirt.HTML_TOC,
-	"HTML_HARD_WRAP":        goskirt.HTML_HARD_WRAP,
-	"HTML_GITHUB_BLOCKCODE": goskirt.HTML_GITHUB_BLOCKCODE,
-	"HTML_USE_XHTML":        goskirt.HTML_USE_XHTML,
-	"HTML_SMARTYPANTS":      goskirt.HTML_SMARTYPANTS,
+	"HTML_SKIP_HTML":   goskirt.HTML_SKIP_HTML,
+	"HTML_SKIP_STYLE":  goskirt.HTML_SKIP_STYLE,
+	"HTML_SKIP_IMAGES": goskirt.HTML_SKIP_IMAGES,
+	"HTML_SKIP_LINKS":  goskirt.HTML_SKIP_LINKS,
+	"HTML_EXPAND_TABS": goskirt.HTML_EXPAND_TABS,
+	"HTML_SAFELINK":    goskirt.HTML_SAFELINK,
+	"HTML_TOC":         goskirt.HTML_TOC,
+	"HTML_HARD_WRAP":   goskirt.HTML_HARD_WRAP,
+	"HTML_USE_XHTML":   goskirt.HTML_USE_XHTML,
+	"HTML_ESCAPE":      goskirt.HTML_ESCAPE,
+	"HTML_SMARTYPANTS": goskirt.HTML_SMARTYPANTS,
 }
-
 
 func parseFlags() (extensions, renderModes, renderer uint) {
 	flag.Usage = func() {

@@ -12,20 +12,20 @@ using the setup encapsuled in the underlaying struct type.
 Usage:
 
 	package main
-	
+
 	import (
 		"goskirt"
 		"os"
 	)
-	
+
 	func main() {
 		data := []byte("Hello, sundown!\n===============\n")
-	
+
 		skirt := goskirt.Goskirt{
 			goskirt.EXT_AUTOLINK | goskirt.EXT_STRIKETHROUGH,
 			goskirt.HTML_SMARTYPANTS | goskirt.HTML_USE_XHTML,
 		}
-	
+
 		// <h1>Hello, sundown!</h1>
 		skirt.WriteHTML(os.Stdout, data)
 	}
@@ -40,8 +40,8 @@ Render mode is a combination of:
 	HTML_SAFELINK
 	HTML_TOC
 	HTML_HARD_WRAP
-	HTML_GITHUB_BLOCKCODE
 	HTML_USE_XHTML
+	HTML_ESCAPE
 	HTML_SMARTYPANTS
 
 ... and the extensions respectively:
@@ -51,8 +51,10 @@ Render mode is a combination of:
 	EXT_FENCED_CODE
 	EXT_AUTOLINK
 	EXT_STRIKETHROUGH
-	EXT_LAX_HTML_BLOCKS
+	EXT_SPACE_HEADERS
+	EXT_SUPERSCRIPT
+	EXT_LAX_SPACING
 
-See LICENSE for licensing details.
+See LICENSE file for licensing details.
 */
 package goskirt
