@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"io/ioutil"
-	"goskirt"
+	"github.com/iwinux/goskirt"
 )
 
 var eflags = map[string]uint{
